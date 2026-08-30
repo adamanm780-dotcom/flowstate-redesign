@@ -286,19 +286,19 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
    13. Karte nach Einwilligung
    --------------------------------------------------------------- */
 (function(){
-  var box = document.querySelector('.mapbox');
-  if(!box) return;
-  var btn = box.querySelector('[data-load-map]');
-  if(!btn) return;
-  btn.addEventListener('click', function(){
-    var src = box.getAttribute('data-map-src');
-    if(!src) return;
-    var f = document.createElement('iframe');
-    f.src = src; f.loading = 'lazy';
-    f.title = 'Karte mit unserem Standort';
-    f.referrerPolicy = 'no-referrer-when-downgrade';
-    f.setAttribute('allowfullscreen', '');
-    box.innerHTML = ''; box.appendChild(f);
+  document.querySelectorAll('.mapbox').forEach(function(box){
+    var btn = box.querySelector('[data-load-map]');
+    if(!btn) return;
+    btn.addEventListener('click', function(){
+      var src = box.getAttribute('data-map-src');
+      if(!src) return;
+      var f = document.createElement('iframe');
+      f.src = src; f.loading = 'lazy';
+      f.title = 'Karte mit unserem Standort';
+      f.referrerPolicy = 'no-referrer-when-downgrade';
+      f.setAttribute('allowfullscreen', '');
+      box.innerHTML = ''; box.appendChild(f);
+    });
   });
 })();
 
