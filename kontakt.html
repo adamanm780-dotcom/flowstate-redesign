@@ -8,11 +8,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Condensed:wght@500;600;700;800&family=Encode+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="stylesheet" href="assets/style.css?v=26">
 </head>
 <body>
 <a class="skip" href="#main">Zum Inhalt springen</a>
-<div class="draftpill">Entwurf · Adresse und Versand folgen</div>
 
 <header class="nav">
   <div class="wrap-wide nav-in">
@@ -52,12 +52,16 @@
   <div class="wrap">
     <div class="contactgrid">
 
-      <form class="form rv" id="kontaktformular" method="post" action="#">
+      <form class="form rv" id="kontaktformular" method="post" action="https://formsubmit.co/flow-state@gmx.de">
         <div class="hp" aria-hidden="true">
           <label for="company">Firma (bitte frei lassen)</label>
           <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
         </div>
         <input type="hidden" name="formStart" value="">
+        <input type="hidden" name="_subject" value="Neue Anfrage über yourflowstate.de">
+        <input type="hidden" name="_next" value="https://yourflowstate.de/danke.html">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
 
         <div class="field">
           <label for="name">Ihr Name</label>
@@ -87,10 +91,6 @@
 
         <button class="btn btn-primary" type="submit">Anfrage senden</button>
 
-        <p style="font-size:.85rem;color:var(--ink-mute)">
-          <span class="ph-tag" style="margin-right:.5rem">Platzhalter</span>
-          Der Versand ist im Entwurf noch nicht angeschlossen.
-        </p>
       </form>
 
       <aside class="contactcard rv" data-i style="--i:1">
@@ -104,11 +104,10 @@
         </div>
 
         <div>
-          <h3>Besuchen Sie uns</h3>
+          <h3>Wo wir sind</h3>
           <p style="font-size:.96rem;color:var(--ink-soft)">
-            <span class="ph-tag" style="margin-bottom:.5rem">Platzhalter</span><br>
-            Straße und Hausnummer<br>
-            65183 Wiesbaden
+            Wiesbaden &mdash; und bei unseren Kunden vor Ort
+            im ganzen Rhein-Main-Gebiet.
           </p>
         </div>
 
