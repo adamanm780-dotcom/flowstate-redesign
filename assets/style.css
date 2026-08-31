@@ -1379,7 +1379,7 @@ span.gdomain{color:var(--ink-mute); border-color:transparent}
 /* Bewertungs-Slider: Karten fuellen exakt — nie ein Anschnitt.
    1 Karte mobil, 2 ab Tablet, 3 ab Desktop; Snap sitzt buendig. */
 .qtrack{grid-auto-columns:100%; gap:1rem; scroll-padding-inline:0}
-.qtrack .quote{scroll-snap-align:start; width:auto; min-width:0}
+.qtrack .quote{scroll-snap-align:start; width:100%; max-width:none; min-width:0}
 @media(min-width:700px){.qtrack{grid-auto-columns:calc((100% - 1rem) / 2)}}
 @media(min-width:1080px){.qtrack{grid-auto-columns:calc((100% - 2rem) / 3)}}
 
