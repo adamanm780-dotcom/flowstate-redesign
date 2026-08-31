@@ -1286,3 +1286,36 @@ span.gdomain{color:var(--ink-mute); border-color:transparent}
 @media (prefers-reduced-motion: reduce){
   .wiesbaden-bg img{transform:none !important}
 }
+
+/* --- Rechtsseiten (Impressum, Datenschutz) ------------------- */
+.legal{background:var(--bg-2)}
+.legal-card{
+  background:var(--white); border:1px solid var(--line);
+  border-radius:26px 8px 26px 8px; padding:clamp(1.6rem,4vw,3.2rem);
+  max-width:80ch; margin-inline:auto;
+  box-shadow:0 30px 64px -44px rgba(16,48,45,.45);
+}
+.legal-card h1{font-size:clamp(2.1rem,1.6rem + 2vw,3rem); margin:.6rem 0 0}
+.legal-card h2{
+  font-size:clamp(1.12rem,1.05rem + .35vw,1.32rem); line-height:1.2;
+  margin:2.4rem 0 .7rem; padding-top:1.4rem; border-top:1px solid var(--line);
+}
+.legal-card h2:first-of-type{margin-top:2rem}
+.legal-lede{
+  font-size:clamp(1.02rem,.98rem + .3vw,1.16rem); color:var(--ink-soft);
+  margin:1rem 0 0; max-width:60ch;
+}
+.legal-card p{margin:0 0 .9rem; line-height:1.65; color:var(--ink-soft)}
+.legal-card strong{color:var(--ink); font-weight:600}
+.legal-card a{color:var(--blue-deep); text-underline-offset:3px}
+.legal-card a:hover{color:var(--blue-hot)}
+.legal-card ul{margin:0 0 1rem; padding-left:1.15rem; display:grid; gap:.45rem; color:var(--ink-soft)}
+.legal-card li{line-height:1.55}
+.legal-card code{
+  font-size:.9em; background:var(--tint); color:var(--blue-deep);
+  border-radius:5px; padding:.1em .38em;
+}
+.legal-foot{
+  margin-top:2.4rem; padding-top:1.3rem; border-top:1px solid var(--line);
+  font-size:.88rem; color:var(--ink-mute);
+}
