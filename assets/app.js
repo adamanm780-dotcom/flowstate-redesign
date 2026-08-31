@@ -345,6 +345,8 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
       /* Reflow, damit die Einflug-Animation neu startet */
       void target.offsetWidth;
       target.classList.add('is-on');
+      /* Panels waren versteckt: Parallax-Positionen neu vermessen */
+      window.dispatchEvent(new Event('resize'));
     });
   });
 })();
@@ -460,5 +462,32 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
     band.appendChild(f);
     band.classList.add('is-live');
     requestAnimationFrame(function(){ band.classList.add('is-shown'); });
+  });
+})();
+
+
+/* ---------------------------------------------------------------
+   18. Geraete-Buehne: Maus-Parallax ueber die Ebenen
+   --------------------------------------------------------------- */
+(function(){
+  if(!finePointer || reduced) return;
+  document.querySelectorAll('[data-devstage]').forEach(function(stage){
+    var tx = 0, ty = 0, cx = 0, cy = 0, running = false;
+    function frame(){
+      running = false;
+      cx += (tx - cx) * 0.12;
+      cy += (ty - cy) * 0.12;
+      stage.style.setProperty('--mxp', cx.toFixed(2) + 'px');
+      stage.style.setProperty('--myp', cy.toFixed(2) + 'px');
+      if(Math.abs(tx - cx) > 0.05 || Math.abs(ty - cy) > 0.05) kick();
+    }
+    function kick(){ if(!running){ running = true; requestAnimationFrame(frame); } }
+    stage.addEventListener('pointermove', function(e){
+      var r = stage.getBoundingClientRect();
+      tx = ((e.clientX - r.left) / r.width - 0.5) * 34;
+      ty = ((e.clientY - r.top) / r.height - 0.5) * 22;
+      kick();
+    }, { passive:true });
+    stage.addEventListener('pointerleave', function(){ tx = 0; ty = 0; kick(); }, { passive:true });
   });
 })();
