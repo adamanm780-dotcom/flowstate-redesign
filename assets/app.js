@@ -88,7 +88,7 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
 (function(){
   if(!finePointer || reduced) return;
   document.querySelectorAll('[data-tilt]').forEach(function(host){
-    var card = host.querySelector('.kurhaus-frame, .pj-shotcard') || host;
+    var card = host.querySelector('.tilt-target, .kurhaus-frame, .pj-shotcard') || host;
     host.addEventListener('pointermove', function(e){
       var r = host.getBoundingClientRect();
       var px = (e.clientX - r.left) / r.width - 0.5;
@@ -387,4 +387,78 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
     kick();
   }, { passive:true });
   hero.addEventListener('pointerleave', function(){ tx = 0; ty = 0; kick(); }, { passive:true });
+})();
+
+/* ---------------------------------------------------------------
+   15. Cursor-Spotlight auf Karten ([data-spot])
+   --------------------------------------------------------------- */
+(function(){
+  if(!finePointer || reduced) return;
+  document.querySelectorAll('[data-spot]').forEach(function(el){
+    var raf = 0, mx = 50, my = 50;
+    function apply(){
+      raf = 0;
+      el.style.setProperty('--mx', mx.toFixed(1) + '%');
+      el.style.setProperty('--my', my.toFixed(1) + '%');
+    }
+    el.addEventListener('pointermove', function(e){
+      var r = el.getBoundingClientRect();
+      mx = ((e.clientX - r.left) / r.width) * 100;
+      my = ((e.clientY - r.top) / r.height) * 100;
+      if(!raf) raf = requestAnimationFrame(apply);
+    }, { passive:true });
+    el.addEventListener('pointerenter', function(){ el.classList.add('lit'); });
+    el.addEventListener('pointerleave', function(){
+      el.classList.remove('lit');
+      mx = 50; my = 50;
+      if(!raf) raf = requestAnimationFrame(apply);
+    });
+  });
+})();
+
+/* ---------------------------------------------------------------
+   16. Zeilenweises Reveal ([data-seq]) — Kinder nacheinander
+   --------------------------------------------------------------- */
+(function(){
+  var hosts = document.querySelectorAll('[data-seq]');
+  if(!hosts.length) return;
+  function run(host){
+    var step = parseInt(host.getAttribute('data-seq'), 10) || 90;
+    var rows = host.querySelectorAll('[data-row]');
+    rows.forEach(function(row, i){
+      if(reduced){ row.classList.add('in'); return; }
+      setTimeout(function(){ row.classList.add('in'); }, i * step);
+    });
+  }
+  if(!('IntersectionObserver' in window)){ hosts.forEach(run); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      io.unobserve(e.target);
+      run(e.target);
+    });
+  }, { rootMargin:'0px 0px -12% 0px', threshold:0.15 });
+  hosts.forEach(function(h){ io.observe(h); });
+})();
+
+/* ---------------------------------------------------------------
+   17. Karte im Standort-Band (Einwilligung + sanftes Einblenden)
+   --------------------------------------------------------------- */
+(function(){
+  var band = document.querySelector('[data-mapband]');
+  if(!band) return;
+  var btn = band.querySelector('[data-load-band]');
+  if(!btn) return;
+  btn.addEventListener('click', function(){
+    var src = band.getAttribute('data-map-src');
+    if(!src) return;
+    var f = document.createElement('iframe');
+    f.src = src; f.loading = 'lazy';
+    f.title = 'Karte mit unserem Einzugsgebiet';
+    f.referrerPolicy = 'no-referrer-when-downgrade';
+    f.setAttribute('allowfullscreen', '');
+    band.appendChild(f);
+    band.classList.add('is-live');
+    requestAnimationFrame(function(){ band.classList.add('is-shown'); });
+  });
 })();
