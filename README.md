@@ -2,6 +2,8 @@
 
 Die neue Agentur-Website. Vanilla HTML/CSS/JS, kein Build-Step.
 **Live-Vorschau:** https://flowstate-redesign.vercel.app
+**Live-Domain:** https://yourflowstate.de — IONOS-Webspace, wird von
+Vercel-Deploys NICHT aktualisiert (siehe Deploy)!
 
 > Entwurfsstand: Preise (990 € / 1.890 €), „7 Tage", Adresse und Öffnungszeiten
 > auf der Kontaktseite sind PLATZHALTER. Vor Go-Live ersetzen — siehe Liste unten.
@@ -31,13 +33,31 @@ assets/
 
 Doppelklick auf `index.html` reicht. Sauberer: `npx serve -p 8766`
 
-## Deploy (Vercel, Projekt „flowstate-redesign")
+## Deploy — zwei getrennte Ziele!
+
+**1. Vorschau (Vercel, Projekt „flowstate-redesign"):**
 
 ```
 npx vercel --prod --yes
 ```
 
 Einmalig pro Rechner vorher: `npx vercel link --yes --project flowstate-redesign`
+
+**2. Live-Domain https://yourflowstate.de (separater Schritt):**
+Die echte Domain hängt NICHT an Vercel. Sie wird vom IONOS-Webspace
+ausgeliefert (Apache + `.htaccess`; `www` läuft zusätzlich über Cloudflare).
+Ein Vercel-Deploy ändert an der Live-Domain also gar nichts — nach jeder
+Änderung muss der komplette Stand (HTML-Dateien + `assets/` + `.htaccess`)
+zusätzlich auf den IONOS-Webspace hochgeladen werden (FTP/IONOS-Zugang
+liegt nicht im Repo, Upload wie gehabt vom PC aus).
+
+„Live-verifiziert" gilt erst, wenn yourflowstate.de den neuen Stand zeigt.
+Schnell-Check, welcher Stand wo liegt — die Cache-Version vergleichen:
+
+```
+curl -s https://yourflowstate.de/ | grep -o "style.css?v=[0-9]*"
+curl -s https://flowstate-redesign.vercel.app/ | grep -o "style.css?v=[0-9]*"
+```
 
 ## Zusammenarbeit (gleicher GitHub-Account, zwei Rechner)
 
