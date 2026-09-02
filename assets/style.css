@@ -1257,13 +1257,9 @@ span.gdomain{color:var(--ink-mute); border-color:transparent}
   @view-transition{ navigation: none; }
 }
 
-/* --- Logo-Marke (Flow-Welle) -------------------------------- */
-.logomark{width:36px; height:25px; flex:none; overflow:visible}
-.logomark path{fill:none; stroke-linecap:round; stroke-linejoin:round}
-.logomark .lm-a{stroke:var(--blue); stroke-width:3.4}
-.logomark .lm-b{stroke:var(--accent); stroke-width:2.3}
-.logo:hover .lm-a{animation:lmFlow .9s var(--ease)}
-.logo:hover .lm-b{animation:lmFlow .9s var(--ease) .08s}
+/* --- Logo-Marke (Flow-Figur) -------------------------------- */
+.logomark{width:auto; height:30px; flex:none; display:block}
+.logo:hover .logomark{animation:lmFlow .9s var(--ease)}
 @keyframes lmFlow{35%{transform:translateX(4px)}70%{transform:translateX(-2px)}}
 .logo b{font-family:var(--f-display); font-weight:800; letter-spacing:-.02em}
 
