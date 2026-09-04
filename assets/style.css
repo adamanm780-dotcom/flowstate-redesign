@@ -476,6 +476,11 @@ h1 .tw-line{display:block; color:var(--blue)}
 .pj-mehlhorn .pj-desc{color:var(--ink-soft)}
 .pj-mehlhorn .tag{background:rgba(122,94,168,.12); color:#5F4787}
 .pj-mehlhorn .pj-go{color:#5F4787}
+.pj-palmberry{background:#F7EFE3; color:var(--ink)}
+.pj-palmberry .pj-no{color:#A81A55}
+.pj-palmberry .pj-desc{color:var(--ink-soft)}
+.pj-palmberry .tag{background:rgba(45,74,28,.10); color:#2D4A1C}
+.pj-palmberry .pj-go{color:#2D4A1C}
 .pj-cta{background:var(--blue); color:#fff}
 .pj-cta .pj-no{color:#B9CCFF}
 .pj-cta .pj-desc{color:#D6E0FF}
@@ -1188,6 +1193,7 @@ footer::before{
 .js .panel.is-on{animation:panelIn .5s var(--ease) both}
 .panel-copy h3{font-size:clamp(1.5rem,1.2rem + 1.2vw,2.1rem); margin-bottom:.8rem; color:var(--blue)}
 .panel-copy > p{color:var(--ink-soft); max-width:46ch}
+.panel-copy > p + p{margin-top:.9rem}
 .gbadge{display:flex; align-items:center; gap:.7rem; margin-top:1.5rem}
 .gword{font-family:var(--f-body); font-weight:600; font-size:1.35rem; letter-spacing:-.02em}
 .gword b{font-weight:600}
